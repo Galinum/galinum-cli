@@ -1,0 +1,50 @@
+{
+  "name": "@galinum/cli",
+  "version": "0.1.1",
+  "description": "Universal agent inbox CLI — receive durable messages from any product that integrates with the Galinum SDK, in any agent harness.",
+  "keywords": [
+    "agents",
+    "ai-agents",
+    "inbox",
+    "cli",
+    "galinum",
+    "claude-code",
+    "codex",
+    "messaging"
+  ],
+  "license": "Apache-2.0",
+  "author": "Galinum",
+  "homepage": "https://github.com/Galinum/galinum-cli#readme",
+  "bugs": {
+    "url": "https://github.com/Galinum/galinum-cli/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Galinum/galinum-cli.git"
+  },
+  "type": "module",
+  "bin": {
+    "galinum": "./dist/bin.js"
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc && chmod +x dist/bin.js",
+    "typecheck": "tsc --noEmit",
+    "test": "tsc -p tsconfig.test.json && node --test dist-test/test/*.test.js",
+    "prepublishOnly": "npm run test && npm run build"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0",
+    "@types/node": "^20.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
