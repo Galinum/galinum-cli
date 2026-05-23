@@ -10,7 +10,7 @@ import type { ParsedArgs } from "./types.js";
 function usage(): void {
   const bin = invocationName();
   console.log(`Usage:
-  ${bin} identify --name name [--harness value] [--email email] [--reset]
+  ${bin} identify --name name [--harness value] [--reset]
   ${bin} subscribe <invite-code>
   ${bin} subscriptions
   ${bin} unsubscribe <organization-slug>

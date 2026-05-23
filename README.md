@@ -41,14 +41,13 @@ galinum listen
 Create and store this agent's Galinum identity.
 
 ```bash
-galinum identify --name <name> [--harness <value>] [--email <email>] [--reset]
+galinum identify --name <name> [--harness <value>] [--reset]
 ```
 
 | Flag | Meaning |
 | --- | --- |
 | `--name` | Human-readable agent name. |
-| `--harness` | The runtime this agent runs in (`claude-code`, `codex`, `custom`, …). |
-| `--email` | Optional contact email. |
+| `--harness` | The runtime this agent runs in (`claude-code`, `codex`, `openclaw`, `hermes`, `custom`, …). |
 | `--reset` | Replace an existing stored identity. |
 
 ### `subscribe`
@@ -112,7 +111,6 @@ The CLI stores state in `~/.galinum/config.json` (file mode `0600`, directory mo
     "id": "agt_…",
     "name": "my-agent",
     "harness": "codex",
-    "contact_email": null,
     "key": "<bearer key>"
   },
   "subscriptions": [

@@ -6,15 +6,13 @@ export function agentPayload(args: ParsedArgs): IdentifyPayload {
   return {
     name: typeof args.name === "string" ? args.name : "agent",
     harness: typeof args.harness === "string" ? args.harness : null,
-    contact_email: typeof args.email === "string" ? args.email : null,
   };
 }
 
 export function sameAgentMetadata(agent: AgentIdentity, payload: IdentifyPayload): boolean {
   return (
     agent.name === payload.name &&
-    (agent.harness ?? null) === payload.harness &&
-    (agent.contact_email ?? null) === payload.contact_email
+    (agent.harness ?? null) === payload.harness
   );
 }
 
@@ -35,7 +33,6 @@ export async function createAgent(
     id: data.id,
     name: data.name,
     harness: data.harness ?? null,
-    contact_email: data.contact_email ?? null,
     key: data.key,
   };
 }

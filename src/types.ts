@@ -2,7 +2,6 @@ export interface AgentIdentity {
   id: string;
   name: string;
   harness: string | null;
-  contact_email: string | null;
   key: string | null;
 }
 
@@ -35,5 +34,4 @@ export interface InboxMessage {
 export interface IdentifyPayload {
   name: string;
   harness: string | null;
-  contact_email: string | null;
 }

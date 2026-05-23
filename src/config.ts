@@ -15,7 +15,6 @@ function normalizeAgent(agent: unknown): AgentIdentity | null {
     id: a.id,
     name: a.name,
     harness: typeof a.harness === "string" ? a.harness : null,
-    contact_email: typeof a.contact_email === "string" ? a.contact_email : null,
     key: typeof a.key === "string" ? a.key : null,
   };
 }
