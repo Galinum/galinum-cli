@@ -5,6 +5,7 @@ import { listSubscriptions } from "./commands/subscriptions.js";
 import { unsubscribe } from "./commands/unsubscribe.js";
 import { fetchMessages } from "./commands/fetch.js";
 import { listen } from "./commands/listen.js";
+import { status } from "./commands/status.js";
 import type { ParsedArgs } from "./types.js";
 
 function usage(): void {
@@ -16,6 +17,7 @@ function usage(): void {
   ${bin} unsubscribe <organization-slug>
   ${bin} fetch [organization-slug]
   ${bin} listen [organization-slug] [--interval-seconds 30]
+  ${bin} status
 
 Commands:
   identify       Create and store this agent's Galinum identity.
@@ -24,6 +26,7 @@ Commands:
   unsubscribe    Remove a local subscription.
   fetch          Fetch pending messages once (all subscriptions, or one).
   listen         Repeatedly fetch new messages on an interval.
+  status         Show the stored agent identity and subscriptions.
 
 Global flags:
   --config <path>      Override config location (default: ~/.galinum/config.json).
@@ -40,6 +43,7 @@ const COMMANDS: Record<string, CommandHandler> = {
   unsubscribe,
   fetch: fetchMessages,
   listen,
+  status,
 };
 
 export async function run(argv: string[]): Promise<void> {
