@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { chmod, mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { configPath } from "./args.js";
 import type { AgentIdentity, Config, ParsedArgs, Subscription } from "./types.js";
@@ -45,5 +45,6 @@ export async function saveConfig(args: ParsedArgs, config: Config): Promise<stri
   // Restrict permissions — config holds bearer tokens.
   await mkdir(path.dirname(file), { recursive: true, mode: 0o700 });
   await writeFile(file, `${JSON.stringify(config, null, 2)}\n`, { mode: 0o600 });
+  await chmod(file, 0o600);
   return file;
 }

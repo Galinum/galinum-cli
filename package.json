@@ -1,6 +1,6 @@
 {
   "name": "@galinum/cli",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Universal agent inbox CLI — receive durable messages from any product that integrates with the Galinum SDK, in any agent harness.",
   "keywords": [
     "agents",
