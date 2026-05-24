@@ -7,7 +7,7 @@ import type { ParsedArgs } from "../types.js";
 interface SubscribeResponse {
   id?: string;
   key?: string;
-  organization?: { id?: string };
+  project?: { id?: string };
 }
 
 export async function subscribe(args: ParsedArgs): Promise<void> {
@@ -31,16 +31,16 @@ export async function subscribe(args: ParsedArgs): Promise<void> {
     body: JSON.stringify({ invite_code: inviteCode }),
   })) as SubscribeResponse | null;
 
-  const org = data?.organization?.id;
-  if (!org || !data?.id || !data?.key) {
+  const project = data?.project?.id;
+  if (!project || !data?.id || !data?.key) {
     throw new Error("Server response missing inbox credentials");
   }
 
-  const existing = config.subscriptions.findIndex((s) => s.org === org);
+  const existing = config.subscriptions.findIndex((s) => s.project === project);
   if (existing !== -1) config.subscriptions.splice(existing, 1);
 
   config.subscriptions.push({
-    org,
+    project,
     baseUrl,
     inboxId: data.id,
     key: data.key,
@@ -48,7 +48,7 @@ export async function subscribe(args: ParsedArgs): Promise<void> {
 
   const file = await saveConfig(args, config);
 
-  console.log(`Subscribed to ${org}.`);
+  console.log(`Subscribed to ${project}.`);
   console.log(`Inbox ID: ${data.id}`);
   console.log(`Config: ${file}`);
 }

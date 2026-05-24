@@ -8,6 +8,6 @@ export async function listSubscriptions(args: ParsedArgs): Promise<void> {
     return;
   }
   for (const sub of config.subscriptions) {
-    console.log(`${sub.org}\t${sub.inboxId}\t${sub.baseUrl}`);
+    console.log(`${sub.project}\t${sub.inboxId}\t${sub.baseUrl}`);
   }
 }

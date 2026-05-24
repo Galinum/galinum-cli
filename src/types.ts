@@ -6,7 +6,7 @@ export interface AgentIdentity {
 }
 
 export interface Subscription {
-  org: string;
+  project: string;
   baseUrl: string;
   inboxId: string;
   key: string;

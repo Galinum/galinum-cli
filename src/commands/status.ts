@@ -32,6 +32,6 @@ export async function status(args: ParsedArgs): Promise<void> {
 
   console.log(`Subscriptions (${config.subscriptions.length}):`);
   for (const sub of config.subscriptions) {
-    console.log(`  ${sub.org}\t${sub.inboxId}\t${sub.baseUrl}`);
+    console.log(`  ${sub.project}\t${sub.inboxId}\t${sub.baseUrl}`);
   }
 }

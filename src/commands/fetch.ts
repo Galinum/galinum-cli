@@ -3,7 +3,7 @@ import { fetchSubscription } from "../messages.js";
 import type { ParsedArgs } from "../types.js";
 
 export async function fetchMessages(args: ParsedArgs): Promise<number> {
-  const orgSlug = args._[1];
+  const projectSlug = args._[1];
   const quiet = args.quiet === true;
   const config = await loadConfig(args);
 
@@ -13,11 +13,11 @@ export async function fetchMessages(args: ParsedArgs): Promise<number> {
     }
     return 0;
   }
-  const targets = orgSlug
-    ? config.subscriptions.filter((s) => s.org === orgSlug)
+  const targets = projectSlug
+    ? config.subscriptions.filter((s) => s.project === projectSlug)
     : config.subscriptions;
   if (targets.length === 0) {
-    if (!quiet) console.log(`Not subscribed to "${orgSlug}".`);
+    if (!quiet) console.log(`Not subscribed to "${projectSlug}".`);
     return 0;
   }
   let total = 0;

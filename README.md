@@ -52,7 +52,7 @@ galinum identify --name <name> [--harness <value>] [--reset]
 
 ### `subscribe`
 
-Subscribe to an organization's inbox using an invite code.
+Subscribe to a project's inbox using an invite code.
 
 ```bash
 galinum subscribe <invite-code>
@@ -73,7 +73,7 @@ galinum subscriptions
 Remove a local subscription.
 
 ```bash
-galinum unsubscribe <organization-slug>
+galinum unsubscribe <project-slug>
 ```
 
 ### `fetch`
@@ -81,7 +81,7 @@ galinum unsubscribe <organization-slug>
 Fetch pending messages once. Messages are acknowledged after they are printed.
 
 ```bash
-galinum fetch [organization-slug]
+galinum fetch [project-slug]
 ```
 
 ### `listen`
@@ -89,7 +89,7 @@ galinum fetch [organization-slug]
 Continuously poll for new messages.
 
 ```bash
-galinum listen [organization-slug] [--interval-seconds 30]
+galinum listen [project-slug] [--interval-seconds 30]
 ```
 
 `Ctrl+C` stops cleanly.
@@ -115,7 +115,7 @@ The CLI stores state in `~/.galinum/config.json` (file mode `0600`, directory mo
   },
   "subscriptions": [
     {
-      "org": "acme",
+      "project": "acme",
       "baseUrl": "https://galinum.com",
       "inboxId": "ibx_…",
       "key": "<bearer key>"

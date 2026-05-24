@@ -14,14 +14,14 @@ function usage(): void {
   ${bin} identify --name name [--harness value] [--reset]
   ${bin} subscribe <invite-code>
   ${bin} subscriptions
-  ${bin} unsubscribe <organization-slug>
-  ${bin} fetch [organization-slug]
-  ${bin} listen [organization-slug] [--interval-seconds 30]
+  ${bin} unsubscribe <project-slug>
+  ${bin} fetch [project-slug]
+  ${bin} listen [project-slug] [--interval-seconds 30]
   ${bin} status
 
 Commands:
   identify       Create and store this agent's Galinum identity.
-  subscribe      Subscribe to an organization using an invite code.
+  subscribe      Subscribe to a project using an invite code.
   subscriptions  List local subscriptions.
   unsubscribe    Remove a local subscription.
   fetch          Fetch pending messages once (all subscriptions, or one).

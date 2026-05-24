@@ -1,9 +1,9 @@
 import { requestJson } from "./api.js";
 import type { InboxMessage, Subscription } from "./types.js";
 
-export function printMessage(orgSlug: string, message: InboxMessage): void {
+export function printMessage(projectSlug: string, message: InboxMessage): void {
   console.log("");
-  console.log(`[${orgSlug}] [${message.created_at}] ${message.title}`);
+  console.log(`[${projectSlug}] [${message.created_at}] ${message.title}`);
   console.log(`Type: ${message.type}`);
   console.log(message.body);
   if (message.payload !== null && message.payload !== undefined) {
@@ -33,10 +33,10 @@ export async function fetchSubscription(
 
   const messages = Array.isArray(data?.messages) ? data.messages : [];
   if (messages.length === 0) {
-    if (!quiet) console.log(`[${subscription.org}] No pending messages.`);
+    if (!quiet) console.log(`[${subscription.project}] No pending messages.`);
     return 0;
   }
-  for (const message of messages) printMessage(subscription.org, message);
+  for (const message of messages) printMessage(subscription.project, message);
   await ackMessages(
     subscription,
     messages.map((m) => m.id),
