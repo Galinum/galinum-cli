@@ -7,14 +7,14 @@ Thanks for your interest in improving `galinum-cli`.
 ```bash
 git clone https://github.com/Galinum/galinum-cli.git
 cd galinum-cli
-npm install
-npm test
+pnpm install
+pnpm test
 ```
 
-The CLI has zero **runtime** dependencies; the only dev dependency is TypeScript. Build once, then run directly:
+The CLI has zero **runtime** dependencies; dev dependencies are managed with pnpm. Build once, then run directly:
 
 ```bash
-npm run build
+pnpm build
 node dist/bin.js help
 ```
 
@@ -37,9 +37,9 @@ dist/                   Compiled output (gitignored, published to npm).
 
 ## Build pipeline
 
-- `npm run build` — compile `src/` → `dist/` and mark the bin executable.
-- `npm run typecheck` — type-check without emitting.
-- `npm test` — compile `src/` + `test/` and run the node test runner.
+- `pnpm build` — compile `src/` → `dist/` and mark the bin executable.
+- `pnpm typecheck` — type-check without emitting.
+- `pnpm test` — compile `src/` + `test/` and run the node test runner.
 - `npm publish` automatically runs `prepublishOnly` (test + build) before uploading.
 
 ## Pull requests
