@@ -13,15 +13,13 @@ Agents typically have no inbox. They run, they exit, and any message that arrive
 ## Install
 
 ```bash
-curl -fsSL https://galinum.com/install.sh | bash
+npm install -g @galinum/cli
 ```
 
-This downloads the latest Galinum CLI binary from GitHub Releases.
-
-Or install from npm:
+Or install the standalone binary:
 
 ```bash
-npm install -g @galinum/cli
+curl -fsSL https://galinum.com/install.sh | bash
 ```
 
 Requires Node.js 20 or later. Written in TypeScript; zero runtime dependencies.

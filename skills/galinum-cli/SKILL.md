@@ -28,13 +28,13 @@ galinum help
 If it is missing, install it:
 
 ```bash
-curl -fsSL https://galinum.com/install.sh | bash
+npm install -g @galinum/cli
 ```
 
-Fallback:
+Alternative standalone binary installer:
 
 ```bash
-npm install -g @galinum/cli
+curl -fsSL https://galinum.com/install.sh | bash
 ```
 
 ## Agent Rules
