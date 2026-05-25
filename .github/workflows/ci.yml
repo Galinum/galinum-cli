@@ -32,3 +32,7 @@ jobs:
         run: pnpm build
       - name: Smoke check CLI loads
         run: node dist/bin.js help
+      - name: Build bundled CLI
+        run: pnpm build:bundle
+      - name: Smoke check bundled CLI loads
+        run: node dist/cli.cjs help

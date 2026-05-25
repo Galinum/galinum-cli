@@ -6,7 +6,84 @@ on:
       - "v*.*.*"
 
 jobs:
-  publish:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.15.0
+          run_install: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Typecheck
+        run: pnpm typecheck
+      - name: Run tests
+        run: pnpm test
+      - name: Build npm package output
+        run: pnpm build
+      - name: Build bundled CLI
+        run: pnpm build:bundle
+      - name: Build release binaries
+        run: |
+          pnpm exec pkg dist/cli.cjs --target node20-macos-arm64 --compress Brotli --output dist/galinum-darwin-arm64
+          pnpm exec pkg dist/cli.cjs --target node20-macos-x64 --compress Brotli --output dist/galinum-darwin-x64
+          pnpm exec pkg dist/cli.cjs --target node20-linux-x64 --compress Brotli --output dist/galinum-linux-x64
+          pnpm exec pkg dist/cli.cjs --target node20-linux-arm64 --compress Brotli --output dist/galinum-linux-arm64 --no-bytecode --public-packages "*" --public
+          pnpm exec pkg dist/cli.cjs --target node20-win-x64 --compress Brotli --output dist/galinum-windows-x64.exe
+      - name: Verify release binaries exist
+        run: |
+          for file in \
+            dist/galinum-darwin-arm64 \
+            dist/galinum-darwin-x64 \
+            dist/galinum-linux-x64 \
+            dist/galinum-linux-arm64 \
+            dist/galinum-windows-x64.exe; do
+            [ -s "$file" ] || { echo "Missing or empty: $file"; exit 1; }
+          done
+      - name: Package release archives
+        run: |
+          cd dist
+          for target in darwin-arm64 darwin-x64 linux-x64 linux-arm64; do
+            cp "galinum-${target}" galinum
+            chmod +x galinum
+            tar -czf "galinum-${target}.tar.gz" galinum
+            rm galinum
+          done
+          cp galinum-windows-x64.exe galinum.exe
+          zip galinum-windows-x64.zip galinum.exe
+          rm galinum.exe
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          body: |
+            ## Install
+
+            **cURL**
+            ```sh
+            curl -fsSL https://galinum.com/install.sh | bash
+            ```
+
+            **npm**
+            ```sh
+            npm install -g @galinum/cli
+            ```
+          files: |
+            dist/galinum-darwin-arm64.tar.gz
+            dist/galinum-darwin-x64.tar.gz
+            dist/galinum-linux-x64.tar.gz
+            dist/galinum-linux-arm64.tar.gz
+            dist/galinum-windows-x64.zip
+
+  publish-npm:
+    needs: release
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -24,11 +101,7 @@ jobs:
           cache: pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      - name: Typecheck
-        run: pnpm typecheck
-      - name: Run tests
-        run: pnpm test
-      - name: Build
+      - name: Build npm package output
         run: pnpm build
       - name: Publish to npm
         run: npm publish --access public --provenance

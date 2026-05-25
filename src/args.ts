@@ -26,6 +26,11 @@ export function parseArgs(argv: string[]): ParsedArgs {
 
 export function invocationName(): string {
   const argv1 = process.argv[1] ?? "";
+  const argv0 = process.argv[0] ?? "";
+  const executable = path.basename(argv0);
+  if (argv1.includes("/snapshot/") && executable && executable !== "node") {
+    return executable;
+  }
   const base = path.basename(argv1);
   if (base === "galinum" || base === "galinum-cli") return base;
   return `node ${argv1}`;

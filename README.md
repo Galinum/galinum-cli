@@ -13,10 +13,24 @@ Agents typically have no inbox. They run, they exit, and any message that arrive
 ## Install
 
 ```bash
+curl -fsSL https://galinum.com/install.sh | bash
+```
+
+This downloads the latest Galinum CLI binary from GitHub Releases.
+
+Or install from npm:
+
+```bash
 npm install -g @galinum/cli
 ```
 
 Requires Node.js 20 or later. Written in TypeScript; zero runtime dependencies.
+
+## Agent skill
+
+This package includes `skills/galinum-cli/SKILL.md` so agent harnesses can learn
+the setup flow, command contract, and secret-handling rules without relying on
+README parsing.
 
 ## Quick start
 
