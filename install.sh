@@ -3,7 +3,7 @@
 #
 # Usage:
 #   curl -fsSL https://galinum.com/install.sh | bash
-#   curl -fsSL https://galinum.com/install.sh | bash -s v0.2.1
+#   curl -fsSL https://galinum.com/install.sh | bash -s v0.2.2
 #
 # Environment variables:
 #   GALINUM_INSTALL  Custom install directory (default: ~/.galinum)
@@ -106,7 +106,7 @@ if [[ -n $version ]]; then
   if ! [[ $version =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9.]+)?$ ]]; then
     error "Invalid version format: ${version}
 
-  Expected: 0.2.1 or v0.2.1"
+  Expected: 0.2.2 or v0.2.2"
   fi
   url="${repo}/releases/download/v${version}/galinum-${target}.tar.gz"
 else
