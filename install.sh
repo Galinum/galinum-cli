@@ -3,7 +3,7 @@
 #
 # Usage:
 #   curl -fsSL https://galinum.com/install.sh | bash
-#   curl -fsSL https://galinum.com/install.sh | bash -s v0.2.2
+#   curl -fsSL https://galinum.com/install.sh | bash -s v0.2.3
 #
 # Environment variables:
 #   GALINUM_INSTALL  Custom install directory (default: ~/.galinum)
@@ -106,7 +106,7 @@ if [[ -n $version ]]; then
   if ! [[ $version =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9.]+)?$ ]]; then
     error "Invalid version format: ${version}
 
-  Expected: 0.2.2 or v0.2.2"
+  Expected: 0.2.3 or v0.2.3"
   fi
   url="${repo}/releases/download/v${version}/galinum-${target}.tar.gz"
 else
@@ -151,10 +151,10 @@ if [[ $(uname -s) == "Darwin" ]]; then
   xattr -d com.apple.quarantine "$exe" 2>/dev/null || true
 fi
 
-installed_version=$("$exe" --version 2>/dev/null || echo "unknown")
+"$exe" help >/dev/null 2>&1 || error "Installed binary did not run successfully."
 
 echo ""
-success "Galinum CLI ${installed_version} installed successfully."
+success "Galinum CLI installed successfully."
 info "Binary: $(tildify "$exe")"
 
 if command -v galinum >/dev/null 2>&1; then
